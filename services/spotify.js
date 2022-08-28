@@ -1,4 +1,4 @@
-import { Axios } from 'axios'
+import axios from "axios"
 
 const LOCALSTORAGE_KEYS = {
   accessToken: 'spotify_access_token',
@@ -31,7 +31,7 @@ const refreshToken = async () => {
       logout()
     }
 
-    const { data } = await Axios.get(`/refresh_token?refresh_token=${LOCALSTORAGE_VALUES.refreshToken}`)
+    const { data } = await axios.get(`/refresh_token?refresh_token=${LOCALSTORAGE_VALUES.refreshToken}`)
     window.localStorage.setItem(LOCALSTORAGE_KEYS.accessToken, data.access_token)
     window.localStorage.setItem(LOCALSTORAGE_KEYS.timestamp, Date.now())
 
@@ -80,3 +80,10 @@ const getAccessToken = () => {
 }
 
 export const accessToken = getAccessToken()
+
+// axios Globals
+axios.defaults.baseURL = 'https://api.spotify.com/v1'
+axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`
+axios.defaults.headers.post['Content-Type'] = 'application/json'
+
+export const getCurrentUserProfile = () => axios.get('/me')
