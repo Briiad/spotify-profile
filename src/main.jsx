@@ -15,10 +15,12 @@ function ScrollToTop() {
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <Router>
-    <ScrollToTop />
-    <Routes>
-      <Route path="/" element={<App />} />
-    </Routes>
-  </Router>
+  <React.Fragment>
+    <Router>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<App />} />
+      </Routes>
+    </Router>
+  </React.Fragment>
 )

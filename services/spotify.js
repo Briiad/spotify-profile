@@ -87,3 +87,11 @@ axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 export const getCurrentUserProfile = () => axios.get('/me')
+
+export const getCurrentUserPlaylist = (limit = 20) => {
+  return axios.get(`/me/playlists?limit=${limit}`)
+}
+
+export const getTopArtists = (time_range = 'short_term') => {
+  return axios.get(`/me/top/artists?time_range=${time_range}`)
+}

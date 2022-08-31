@@ -2,7 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 
 // import animation
-import {tapHoverBtn, transition} from '../../components/framer'
+import {tapHoverBtn, transition} from '../components/framer'
 
 const Login = () => {
   return (
