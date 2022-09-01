@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import { motion } from 'framer-motion'
 import { catchErrors } from '../../services/catchErr'
-import { getCurrentUserProfile, logout, getCurrentUserPlaylist, getTopArtists } from '../../services/spotify'
+import { getCurrentUserProfile, logout, getCurrentUserPlaylist, getTopArtists, getTopTracks } from '../../services/spotify'
 
-import { ArtistsGrid, SectionWrapper } from '../components'
+import { ArtistsGrid, SectionWrapper, TrackList } from '../components'
 
 // import animation
 import {tapHoverBtn, transition} from '../components/framer'
@@ -13,6 +13,7 @@ const Profile = () => {
   const [profile, setProfile] = useState(null)
   const [playlist, setPlaylist] = useState(null)
   const [artist, setArtist] = useState(null)
+  const [track, setTrack] = useState(null)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,11 +25,13 @@ const Profile = () => {
 
       const topArtist = await getTopArtists()
       setArtist(topArtist.data)
+
+      const topTracks = await getTopTracks()
+      setTrack(topTracks.data)
     }
     catchErrors(fetchData())
   }, [])
 
-  console.log(artist)
   return (
     <>
       <motion.button 
@@ -65,10 +68,17 @@ const Profile = () => {
         </header>
       )}
 
-      {artist && (
-        <SectionWrapper title="Top Artist this month" seeAllLink="/top-artist">
-          <ArtistsGrid artists={artist.items.slice(0, 5)} />
-        </SectionWrapper>
+      {artist &&  track && (
+        <main>
+          <SectionWrapper title="Top Artist this month" seeAllLink="/top-artist">
+            <ArtistsGrid artists={artist.items.slice(0, 5)} />
+          </SectionWrapper>
+
+          <SectionWrapper title="Top Tracks this month" seeAllLink="/top-tracks">
+            <TrackList tracks={track.items.slice(0, 10)} />
+          </SectionWrapper>
+        </main>
+        
       )}
     </>
   )
