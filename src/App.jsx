@@ -16,7 +16,7 @@ function App() {
   return (
     <>
       <AnimatePresence exitBeforeEnter={true}>
-        <div className=' w-full h-screen font-monts' >
+        <div className=' w-full h-full font-monts' >
           {!token ? (
               <Login /> ) : ( <Profile />
           )}

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { catchErrors } from '../../services/catchErr'
 import { getCurrentUserProfile, logout, getCurrentUserPlaylist, getTopArtists } from '../../services/spotify'
 
-import { ArtistsGrid } from '../components'
+import { ArtistsGrid, SectionWrapper } from '../components'
 
 // import animation
 import {tapHoverBtn, transition} from '../components/framer'
@@ -66,9 +66,9 @@ const Profile = () => {
       )}
 
       {artist && (
-        <div className='container h-full mx-auto px-10 mb-8'>
+        <SectionWrapper title="Top Artist this month" seeAllLink="/top-artist">
           <ArtistsGrid artists={artist.items.slice(0, 5)} />
-        </div>
+        </SectionWrapper>
       )}
     </>
   )
